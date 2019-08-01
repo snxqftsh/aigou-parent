@@ -3,8 +3,11 @@ package cn.itsource.aigou.service.impl;
 import cn.itsource.aigou.domain.ProductType;
 import cn.itsource.aigou.mapper.ProductTypeMapper;
 import cn.itsource.aigou.service.IProductTypeService;
+import cn.itsource.basic.util.AjaxResult;
+import cn.itsource.common.client.RedisClient;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,12 +27,33 @@ import java.util.Map;
 public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, ProductType> implements IProductTypeService {
 
 
+    @Autowired
+    //由于依赖的openfeign，会创建接口的动态代理对象交给spring管理
+    private RedisClient redisClient;
+
+
+    /**
+     * 查询商品类型树
+     * @return
+     */
     @Override
     public List<ProductType> loadTypeTree() {
-
+        //redis缓存
+        //从Redis里面查询缓存数据
+        //从redis中获取数据
+        AjaxResult result = redisClient.get("productTypes");
+        String productTypesJsonStr = (String) result.getRestObj();
+        List<ProductType> productTypes = JSON.parseArray(productTypesJsonStr, ProductType.class);
+        //判断是否有值
+        if(productTypes==null||productTypes.size()<=0){
+            //没有则查询数据库，并将数据缓存到redis中
+            productTypes = loop();
+            redisClient.set("productTypes",JSON.toJSONString(productTypes));
+        }
+        //返回数据
+        return productTypes;
         //递归方式实现
         //return recursive(0L);
-        return loop();
     }
     /**
      * 循环方式
