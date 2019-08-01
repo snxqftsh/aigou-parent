@@ -1,0 +1,20 @@
+server:
+  port: 4000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka  # 注册到注册中心
+  instance:
+    prefer-ip-address: true # 以ip注册到注册中心
+
+spring:
+  application:
+    name: config-server # 服务名
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/snxqftsh/aigou-config.git
+          username: snxqfsh
+          password: zs3140825

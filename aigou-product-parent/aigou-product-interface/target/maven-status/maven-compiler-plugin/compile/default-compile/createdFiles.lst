@@ -1,0 +1,6 @@
+cn\itsource\aigou\domain\Product.class
+cn\itsource\aigou\query\BrandQuery.class
+cn\itsource\aigou\query\ProductTypeQuery.class
+cn\itsource\aigou\domain\ProductType.class
+cn\itsource\aigou\domain\Brand.class
+cn\itsource\aigou\query\ProductQuery.class

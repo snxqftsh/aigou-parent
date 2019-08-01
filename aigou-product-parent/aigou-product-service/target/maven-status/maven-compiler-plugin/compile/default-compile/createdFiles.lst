@@ -1,0 +1,15 @@
+cn\itsource\aigou\service\IProductService.class
+cn\itsource\aigou\service\impl\BrandServiceImpl.class
+cn\itsource\aigou\service\impl\ProductServiceImpl.class
+cn\itsource\aigou\service\impl\ProductTypeServiceImpl.class
+cn\itsource\aigou\controller\ProductTypeController.class
+cn\itsource\aigou\ProductServiceApplication.class
+cn\itsource\aigou\config\MybatisPlusConfig.class
+cn\itsource\aigou\mapper\BrandMapper.class
+cn\itsource\aigou\service\IProductTypeService.class
+cn\itsource\aigou\controller\BrandController.class
+cn\itsource\aigou\config\Swagger2.class
+cn\itsource\aigou\controller\ProductController.class
+cn\itsource\aigou\service\IBrandService.class
+cn\itsource\aigou\mapper\ProductTypeMapper.class
+cn\itsource\aigou\mapper\ProductMapper.class
